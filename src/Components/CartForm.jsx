@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { UserContext } from '../Context/UserContext'
 import Input from './Input'
 import  Button  from '../Components/Button'
+import axiosInstance from './Axios'
 
 function CartForm({cartitemid,cartData}) {
 
@@ -10,28 +11,24 @@ function CartForm({cartitemid,cartData}) {
 
     const{user} = useContext(UserContext)
 
-    const {handleSubmit,register,reset} = useForm({
-        values:{
+    const {handleSubmit,register} = useForm(
+      {
+        defaultValues:{
             start_date:cartData?.start_date||"",
      end_date:cartData?.end_date||"",
             members : cartData?.members||0
         }
-    })
+    }
+  )
 
-    // useEffect(() => {
-    //  if(cartData)
-    //   reset({
-    //  start_date:cartData?.start_date||"",
-    //  end_date:cartData?.end_date||"",
-    //         members : cartData?.members||0
-    // })
-    // }, [reset,cartData])
-    
 
     const addToCart = async(newData) => {
       console.log(cartitemid )
+      console.log("newData",newData)
+      console.log("cartData",cartData)
+      
         if(cartData){
-            await fetch(`${baseUrl}/cart/updatecart/${cartitemid}`,
+            const response = await fetch(`${baseUrl}cart/updatecart/${cartitemid}`,
                 {
                     method:"PATCH",
                     headers :{
@@ -47,28 +44,31 @@ function CartForm({cartitemid,cartData}) {
 
                 }
             )
-            // const data = await response.json()
-            // console.log(data)
+            const data = await response.json()
+            console.log(data)
+
+            // axiosInstance.patch(`cart/updatecart/${cartitemid}`,
+            //   {
+            //           start_date : newData?.start_date,
+            //           end_date : newData?.end_date,
+            //           members : newData?.members,
+            //           touristSpot : `${cartitemid}`
+            //         }
+            // )
 
         }
         else{
-          console.log(cartitemid)
-            await fetch(`${baseUrl}cart/addtocart/`, {
-        method:"POST",
-        headers:{"Content-Type":"application/json",
-          "Authorization":`Token ${user.token}`
-        },
-        body:
-          JSON.stringify(
-            {
+          console.log(cartitemid, user?.token)
+      
+
+      axiosInstance.post(`cart/addtocart/`,
+        {
           members : newData.members,
           start_date : new Date(newData.start_date).toISOString().slice(0,10),
           end_date:new Date(newData.end_date).toISOString().slice(0,10),
           touristSpot :`${cartitemid}`
             }
-             )
-        
-      })
+      )
         
         }
 }

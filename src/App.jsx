@@ -5,7 +5,7 @@ import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from '../src/Root'
 import PassValidity from './Pages/PassValidity'
 import ViewSpots from './Pages/ViewSpots'
-import Home from './Components/Home'
+import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Signin from './Pages/Signin'
 import { useContext, useEffect } from 'react'
@@ -13,11 +13,14 @@ import { UserContext } from './Context/UserContext'
 import LogoutBtn from './Components/LogoutBtn'
 import Spot from './Pages/Spot'
 import ProtectedRoute from './Components/ProtectedRoute'
+import Search from './Pages/Search'
+import { Toaster } from 'react-hot-toast';
 
 
 function App() {
 
       const baseUrl="http://127.0.0.1:8000/"
+      
 
   const { user,setUser,setCartItem,setCount} = useContext(UserContext)
   useEffect(() => {
@@ -70,6 +73,7 @@ function App() {
         {path:"/viewAttractions", element:<ViewSpots/>},
         {path:"/login",element:<Login/>},
         {path:"/signin",element:<Signin/>},
+        {path:"/search", element:<Search/>},
         {
           path:"", 
           element: <ProtectedRoute/>,
@@ -89,6 +93,7 @@ function App() {
   
 return(
   <div>
+    <Toaster position="top-center" />
   <RouterProvider router={router}/>
   </div>
   )

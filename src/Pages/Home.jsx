@@ -4,12 +4,12 @@ import Taj_Mahal from '../ImageUtils/Taj_Mahal.jpeg'
 import Runner from '../ImageUtils/Runner.png'
 import Whoa from '../ImageUtils/Whoa.png'
 import '../App.css';
-import Container from './Container'
+import Container from '../Components/Container'
 import passedCover from '../ImageUtils/passedCover_transparent.png'
-import SearchBar from './SearchBar';
+import SearchBar from '../Components/SearchBar';
 import pinaColada from '../ImageUtils/pinaColada.png'
-import Button from './Button';
-import FeaturesSpots from '../Pages/FeaturesSpots';
+import Button from '../Components/Button';
+import FeaturesSpots from './FeaturesSpots';
 
 function Home() {
   // const [inputvalue, setInputvalue] = useState(50)

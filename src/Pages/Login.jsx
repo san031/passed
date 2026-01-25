@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios'
-import Container from '../Components/Container'
+import Container from '../Components/Container' 
+import toast from 'react-hot-toast';
 import Logo from '../Components/Logo';
 import { useForm } from 'react-hook-form'
 import { UserContext } from '../Context/UserContext';
 import Input from '../Components/Input';
 import Button from '../Components/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from '../Components/Axios';
 
 function Login() {
 
@@ -14,41 +16,65 @@ function Login() {
     const {user,setUser} = useContext(UserContext)
     const navigate = useNavigate()
 
-    const handleLogin = async(data) => {
-        try {
-             console.log(data);
-        const response = await fetch("http://127.0.0.1:8000/login/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: data.email,
-            password: data.password,
-          }),
-        })
+    
 
-        console.log(response);
-        // if(!response.ok)
-        //     throw new Error("Login failed")
+    // const handleLogin = async(data) => {
+    //     try {
+    //          console.log(data);
+    //     const response = await fetch("http://127.0.0.1:8000/login/", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         email: data.email,
+    //         password: data.password,
+    //       }),
+    //     })
+
+    //     console.log(response);
+    //     // if(!response.ok)
+    //     //     throw new Error("Login failed")
 
         
 
-        const responseData = await response.json()
+    //     const responseData = await response.json()
 
-        // console.log(responseData);
+    //     // console.log(responseData);
         
 
-        localStorage.setItem("user", JSON.stringify(responseData))
+    //     localStorage.setItem("user", JSON.stringify(responseData))
 
-        setUser(responseData)
-        if(user)
-            navigate('/')
-        } catch (error) {
-         console.log("Login error", error.statusText);   
-        }
+    //     setUser(responseData)
+    //     if(user)
+    //         navigate('/')
+    //     } catch (error) {
+    //      console.log("Login error", error.statusText);   
+    //     }
        
 
+    // }
+
+    const handleLogin = (data) => {
+        try {
+            axiosInstance.post(`login/`,{
+            email: data.email,
+            password: data.password,
+        },{ _skipAuth: true })
+        .then((responseData) => {
+            
+            setUser(responseData.data) 
+             localStorage.setItem("user", JSON.stringify(responseData.data))
+             toast.success("You are now logged in ")
+        })
+        if(user)
+            navigate('/')
+
+        } catch (error) {
+             console.log("Login error", error.statusText);
+             toast.error(`Log in failed`, error.statusText)
+        }
+        
     }
     return (
         <Container className='bg-amber-50 h-full w-full'>

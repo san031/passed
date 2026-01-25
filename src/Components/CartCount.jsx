@@ -6,6 +6,8 @@ import Button from './Button'
 import Modal from './Modal';
 import Loader from './Loader';
 import CartForm from './CartForm';
+import axiosInstance from './Axios';
+import toast from 'react-hot-toast';
 
 function CartCount({className=''}) {
     const [sidebarOpen,setSidebarOpen] = useState(false)
@@ -31,30 +33,27 @@ function CartCount({className=''}) {
     }
     const toggleSidebar = () => (setSidebarOpen(!sidebarOpen))
 
-    // const handleCountandCart = () => {
-    //   handleCount()
-    //   handleCart()
-    // }
+    
 
     const generatePass = async() => {
-      await fetch(`${baseUrl}pass/passed/`,
-        {
-          method:"POST",
-          headers : {"Content-Type":"application/json", "Authorization":`Token ${user.token}`}
-        }
-      )
+      
+      axiosInstance.post(`pass/passed/`)
       getPassId()
     }
 
     const getPassId = async() => {
-      const response = await fetch(`${baseUrl}pass/viewpass/`,{
-        method:"GET",
-        headers : {"Content-Type":"application/json", "Authorization":`Token ${user.token}`}
-
-      })
-     const data = await response.json()
-     setPasses(data[data.length - 1].pass_code)
-     setisOpen(true)
+   
+    try {
+      const {data} = await axiosInstance.get(`pass/viewpass/`)
+      if (data && data.length>0){
+          const lastPasscode = data[data.length - 1].pass_code
+          setPasses(lastPasscode)
+          setisOpen(true)
+      }
+    } catch (error) {
+       console.error('Error:', error);
+    toast.error('Failed to fetch pass');
+    }
     }
 
 
@@ -92,13 +91,6 @@ function CartCount({className=''}) {
             "YOUR CART IS EMPTY":
             cartItem.map((item) =>
             <div className='grid grid-cols-2' key={item.id}>
-              {/* <div className='mt-8'>
-                <p>Start Date :{item.start_date}</p>
-              <p>End Date: {item.end_date}</p>
-              <p>Price : {item.spots.price}</p>
-              <p>Venue: {item.spots.title}</p>
-              <p>Members: {item.members}</p>
-              </div> */}
               <CartForm
               cartitemid={item.id}
               cartData = 

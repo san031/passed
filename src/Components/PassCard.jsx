@@ -5,31 +5,6 @@ function PassCard({spotty}) {
 
   return (
         <div>
-        {/* {spotty &&
-          <div className='h-150 w-96 border-1'>
-            <div className='h-50 w-50   flex flex-col justify-center  '>
-            <Logo/>
-        </div>
-        <div>Congratulations your pass has been issued successfully</div>
-        <hr/>
-
-        Pass Code : {spotty.pass_code}
-        {spotty?.items?.map((item) => 
-
-          <div>
-            <div>Venue:{item.spots.title}</div>
-            <div>Location : {item.spots.location}</div>
-            <div>Ticket Price : {item.spots.price}</div>
-            <div>City : {item.spots.city}</div>
-            <div>Opening time : {item.spots.opening_time}</div>
-            <div>Closing Time : {item.spots.closing_time}</div>
-          </div>
-        
-        )}
-        
-        
-        </div>
-        } */}
 
       {
         spotty &&   <widget type="ticket" class="--flex-column">

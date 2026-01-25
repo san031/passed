@@ -7,6 +7,7 @@ import Input from '../Components/Input'
 import { UserContext } from '../Context/UserContext'
 import Loader from '../Components/Loader'
 import CartForm from '../Components/CartForm'
+import axiosInstance from '../Components/Axios'
 
 
 function Spot() {
@@ -20,58 +21,14 @@ function Spot() {
 
 
     useEffect(() => {
-     const fetchSpots = async() => {setIsLoading(true)
-      const response = await fetch(`${baseUrl}addAttractions/${id}`,
-        {
-          method:"GET",
-          headers:{
-            "Content-Type":"application/json"
-          }
-        }
-      )
-      const data = await response.json()
-      setSpots( data)
-      setIsLoading(false)}
-      // .then((response) => {setSpots(response.data), setIsLoading(false)} )}
+     const fetchSpots = async() => {
+      setIsLoading(true)
+      axiosInstance.get(`addAttractions/${id}`)
+      .then((response) => {setSpots(response.data), setIsLoading(false)} )}
+      
       fetchSpots();
     }, [])
     
-    // useEffect(() => {
-    //   async() => {
-    //     await fetch(`${baseUrl}cart/UserCart/`,
-    //     {
-    //       method:"GET",
-    //       headers : {"Content-Type":"application/json", "Authorization":`Token ${user.token}`}
-    //     }
-    //   )
-    //   .then(async(response) =>  {
-    //     const res = await response.json()
-    //     console.log(res) })
-    //   }
-    // }, [])
-    
-
-    const addToCart = async(data) => {
-
-      console.log(cartId)
-       await fetch(`${baseUrl}cart/addtocart/`, {
-        method:"POST",
-        headers:{"Content-Type":"application/json",
-          "Authorization":`Token ${user.token}`
-        },
-        body:
-          JSON.stringify(
-            {
-          members : data.members,
-          start_date : new Date(data.start_date).toISOString().slice(0,10),
-          end_date:new Date(data.end_date).toISOString().slice(0,10),
-          touristSpot : spots.my_id
-        }
-          )
-        
-      })
-    }
-
    
   return (
     <div>
@@ -93,14 +50,7 @@ function Spot() {
          
           <img className='mix-blend-multiply drop-shadow-[0_10px_10px_#603f2680] lg:h-140 md:h-90 w-auto' src={`${baseUrl}${spots?.images?.[0]?.image}`}/> 
           <div className='relative top-24'>{spots.category}
-            {/* <form onSubmit={handleSubmit(addToCart)}>
-          <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type = "date" label ="start_date" {...register("start_date",{required:true})}/>
-          <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type="date" label="End Date" {...register("end_date",{required:true})}/>
-          <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type="number" label="members" {...register("members",{required:true})}/>
-          <Button className="mt-4">MOVE TO TOUR CART</Button>
-          
-          
-        </form>  */}
+            
         {console.log(`${spots.my_id}`)}
         <CartForm cartitemid = {`${spots.my_id}`}/>
         <hr className='m-2'/>

@@ -6,8 +6,20 @@ const axiosInstance=axios.create({
     timeout:5000,
     headers:{
         "Content-Type":"application/json",
-        Accept:"application/json"
+        // Accept:"application/json"
     }
 })
+
+axiosInstance.interceptors.request.use((config) => {
+    const token = JSON.parse(localStorage.getItem('user'))?.token || ''
+
+    if(token && !config._skipAuth){
+        config.headers.Authorization = `Token ${token}`
+    }
+    return config
+},
+(error) => Promise.reject(error)
+
+)
 
 export default axiosInstance

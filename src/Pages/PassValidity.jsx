@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import Button from '../Components/Button'
 import Input from '../Components/Input'
 import PassCard from '../Components/PassCard'
+import axiosInstance from '../Components/Axios'
 
 function PassValidity() {
     const {user} = useContext(UserContext)
@@ -18,16 +19,18 @@ function PassValidity() {
 
         // {console.log(passdata)}
         setPasscode(passdata.pass_id)
-        const response=await fetch('http://127.0.0.1:8000/pass/viewpass/',
-            {
-                method:"GET",
-                headers:{
-                    "Content-Type":"application/json",
-                    "Authorization" :`Token ${user.token}`
-                }
-            }
-        )
-        const data = await response.json()
+        // const response=await fetch('http://127.0.0.1:8000/pass/viewpass/',
+        //     {
+        //         method:"GET",
+        //         headers:{
+        //             "Content-Type":"application/json",
+        //             "Authorization" :`Token ${user.token}`
+        //         }
+        //     }
+        // )
+        
+        // const data = await response.json()
+        const {data} = await axiosInstance.get(`pass/viewpass/`)
         data.map((passs) => {passs.pass_code === passdata.passid ? 
              setSpotty(passs)
             : 
