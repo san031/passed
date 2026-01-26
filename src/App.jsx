@@ -1,6 +1,5 @@
 
 import './App.css'
-import BuypassForm from './Components/buypassForm'
 import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from '../src/Root'
 import PassValidity from './Pages/PassValidity'
