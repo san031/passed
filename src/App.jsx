@@ -1,6 +1,5 @@
 
 import './App.css'
-import BuypassForm from './Components/buypassForm'
 import {createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from '../src/Root'
 import PassValidity from './Pages/PassValidity'
@@ -68,7 +67,6 @@ function App() {
       element:<Root/>,
       children:[
         {path:'', element:<Home/>},
-        { path:"/buypass",element:<BuypassForm/> },
        
         {path:"/viewAttractions", element:<ViewSpots/>},
         {path:"/login",element:<Login/>},
