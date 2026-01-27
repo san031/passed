@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom'
 
 function Card({item}) {
 
-const baseUrl="http://127.0.0.1:8000/"
+// const baseUrl="http://127.0.0.1:8000/"
+const isDevelopment = import.meta.env.MODE === 'development'
+
+const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
   return (
     <Link className=' bg-[#ead9dd] relative left-32 h-96 w-96 flex flex-col rounded-4xl  spacing-x-12 hero ' key={item.my_id} 
     // to={`${baseUrl}/addAttractions/${item.my_id}`}
