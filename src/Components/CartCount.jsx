@@ -35,8 +35,7 @@ function CartCount({className=''}) {
 
     
 
-    const generatePass = async() => {
-      
+    const generatePass = async() => {      
       axiosInstance.post(`pass/passed/`)
       getPassId()
     }
@@ -92,6 +91,7 @@ function CartCount({className=''}) {
             cartItem.map((item) =>
             <div className='grid grid-cols-2' key={item.id}>
               <CartForm
+              className = 'mb-5'
               cartitemid={item.id}
               cartData = 
                 {{start_date:item.start_date ,
@@ -100,14 +100,14 @@ function CartCount({className=''}) {
               }
                />
               <img className='w-50 h-50' src={`${baseUrl}${item?.spots?.images?.[0].image}`} alt="" />
-              <div className='flex place-items-center'>
+              {/* <div className='flex place-items-center'>
                 <button onClick = {() => removeTourItem(item.id)}>Remove Item</button>
-              </div>
+              </div> */}
             </div>
             )
             }</div>
         </div>}
-        <button onClick={() => generatePass()}>Generate Pass</button>
+        <Button onClickAgain={generatePass}>Generate Pass</Button>
       </div>
     {isOpen && <Modal closeModal = {() => setisOpen(false)}><p>
       Your pass id is : {passes}

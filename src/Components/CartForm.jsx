@@ -5,7 +5,7 @@ import Input from './Input'
 import  Button  from '../Components/Button'
 import axiosInstance from './Axios'
 
-function CartForm({cartitemid,cartData}) {
+function CartForm({cartitemid,cartData, className = ''}) {
 
     const baseUrl="http://127.0.0.1:8000/"
 
@@ -20,6 +20,16 @@ function CartForm({cartitemid,cartData}) {
         }
     }
   )
+
+  const removeTourItem = async(cartitemid) => {
+        await fetch(`${baseUrl}cart/removecartitem/${cartitemid}/`,
+          {method:"delete",
+            headers:{"Content-Type":"application/json"}
+          }
+        )
+
+      // const data = await response.json()
+    }
 
 
     const addToCart = async(newData) => {
@@ -75,7 +85,7 @@ function CartForm({cartitemid,cartData}) {
 
   return (
     <div>
-        <form onSubmit={handleSubmit(addToCart)}>
+        <form className={`${className}`} onSubmit={handleSubmit(addToCart)}>
 
                   <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type = "date" label ="start_date" {...register("start_date",{required:true})}/>
                   {/* <input type='date' {...register("start_date", {required: true})}/>
@@ -83,7 +93,10 @@ function CartForm({cartitemid,cartData}) {
                   <input type='number' {...register("members",{required:true})}/> */}
                   <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type="date" label="End Date" {...register("end_date",{required:true})}/>
                   <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type="number" label="members" {...register("members",{required:true})}/>
-                  <Button className="mt-4">{cartData? "UPDATE" :"MOVE TO TOUR CART" }</Button>
+                  <div className='flex'>
+                    <Button type='submit' className="mt-4">{cartData? "UPDATE" :"MOVE TO TOUR CART" }</Button>
+                  {cartData && <Button type='button' onClick = {() => removeTourItem(cartitemid)} className="mt-4 ml-4">REMOVE ITEM</Button>}
+                  </div>
                   
                   
                 </form> 
