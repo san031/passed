@@ -18,10 +18,7 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
 
-      const baseUrl="http://127.0.0.1:8000/"
-      
-
-  const { user,setUser,setCartItem,setCount} = useContext(UserContext)
+  const { user,setUser,setCartItem,setCount,handleCart} = useContext(UserContext)
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
 
@@ -34,25 +31,7 @@ function App() {
 
 
   useEffect(() => {
-    const handleCart = async() => {
-      if(user){
-      await fetch(`${baseUrl}cart/UserCart/`,
-        {
-          method:"GET",
-          headers : {"Content-Type" :"application/json", "Authorization":`Token ${user.token}`}
-        }
-      )
-      .then(async(response) =>  {
-        const res = await response.json()
-        
-        
-        setCartItem(res.items)
-        setCount(res.items.length)
-        
-        console.log(res) 
-      })}
-    }
-
+  
     handleCart();
     
   }, [user,setCartItem, setCount])

@@ -9,7 +9,7 @@ function CartForm({cartitemid,cartData, className = ''}) {
 
     const baseUrl="http://127.0.0.1:8000/"
 
-    const{user} = useContext(UserContext)
+    const{handleCart} = useContext(UserContext)
 
     const {handleSubmit,register} = useForm(
       {
@@ -23,14 +23,18 @@ function CartForm({cartitemid,cartData, className = ''}) {
 
   const removeTourItem = async() => {
     console.log(cartitemid)
-        await fetch(`${baseUrl}cart/removecartitem/${cartitemid}/`,
-          {method:"delete",
-            headers:{"Content-Type":"application/json",
-              "Authorization":`Token ${user.token} `
-            }
-          }
-        )
-        // axiosInstance.delete(`cart/removecarttem/${cartitemid}`)
+        // await fetch(`${baseUrl}cart/removecartitem/${cartitemid}/`,
+        //   {method:"delete",
+        //     headers:{"Content-Type":"application/json",
+        //       "Authorization":`Token ${user.token} `
+        //     }
+        //   }
+        // )
+         await axiosInstance.delete(`cart/removecartitem/${cartitemid}/`)
+         .then((res) => {
+          if(res.status === 204){
+            handleCart();}
+         })
 
       // const data = await response.json()
     }
@@ -44,13 +48,18 @@ function CartForm({cartitemid,cartData, className = ''}) {
         if(cartData){
             
 
-            axiosInstance.patch(`cart/updatecart/${cartitemid}/`,
+        await axiosInstance.patch(`cart/updatecart/${cartitemid}/`,
               {
                       start_date : newData?.start_date,
                       end_date : newData?.end_date,
                       members : newData?.members,
                     }
             )
+            .then((res) => {
+          if(res.status === 201){
+            handleCart();}
+         })
+            
 
         }
         else{     
@@ -62,7 +71,10 @@ function CartForm({cartitemid,cartData, className = ''}) {
           end_date:new Date(newData.end_date).toISOString().slice(0,10),
           touristSpot :`${cartitemid}`
             }
-      )
+      ).then((res) => {
+          if(res.status === 201){
+            handleCart();}
+         })
         
         }
 }

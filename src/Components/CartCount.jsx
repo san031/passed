@@ -13,7 +13,7 @@ function CartCount({className=''}) {
     const [sidebarOpen,setSidebarOpen] = useState(false)
     // const [count,setCount] = useState(0)
     // const [cartItem,setCartItem] = useState("")
-    const {user,setCartId,cartItem,count} = useContext(UserContext)
+    const {user,setCartId,cartItem,count,handleCart} = useContext(UserContext)
     const [passes,setPasses] = useState("")
     const [isOpen,setisOpen] = useState(false)
     const[isLoading,setIsLoading] = useState(false)
@@ -36,6 +36,10 @@ function CartCount({className=''}) {
    
     try {
       const {data} = await axiosInstance.get(`pass/viewpass/`)
+      .then((res) => {
+        if(res.status === 200)
+          handleCart()
+      })
       if (data && data.length>0){
           const lastPasscode = data[data.length - 1].pass_code
           setPasses(lastPasscode)
