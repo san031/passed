@@ -64,7 +64,7 @@ function Login() {
         .then((responseData) => {
             
             setUser(responseData.data) 
-             localStorage.setItem("user", JSON.stringify(responseData.data))
+             
              toast.success("You are now logged in ")
         })
         if(user)

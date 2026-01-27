@@ -5,6 +5,7 @@ import Input from '../Components/Input'
 import Button from '../Components/Button'
 import {useForm} from 'react-hook-form'
 import { UserContext } from '../Context/UserContext'
+import axiosInstance from '../Components/Axios'
 
 function Signin() {
   const {register, handleSubmit} = useForm()
@@ -12,33 +13,44 @@ function Signin() {
 
   const signin = async(data) => {
    try {
-     const response = await fetch(
-      'http://127.0.0.1:8000/register/',
-      {
-        method:'POST',
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
+    //  const response = await fetch(
+    //   'http://127.0.0.1:8000/register/',
+    //   {
+    //     method:'POST',
+    //     headers : {
+    //       "Content-Type" : "application/json"
+    //     },
+    //     body : JSON.stringify({
+    //       username:data.email,
+    //       email:data.email,
+    //       password:data.password,
+    //       full_name : data.fullname
+    //     })
+
+    //   }
+    // )
+
+    const resData = await axiosInstance.post(`register/`,{
           username:data.email,
           email:data.email,
           password:data.password,
           full_name : data.fullname
-        })
+        },
+      {skip_Auth:true}
+      )
 
-      }
-    )
+    // console.log(response);
 
-    console.log(response);
+    // if(!response.ok)
+    //   throw new Error("signup failed")
 
-    if(!response.ok)
-      throw new Error("signup failed")
+    // const responseData = await response.json()
 
-    const responseData = await response.json()
-
-    console.log(responseData);
+    console.log(resData);
     // localStorage.setItem("user",JSON.stringify(responseData))
-    setUser(responseData)
+    setUser(resData)
+    
+localStorage.setItem("user", JSON.stringify(resData.data))
    } catch (error) {
     console.log("Error during registering", error);
    }
@@ -50,7 +62,7 @@ function Signin() {
               <form onSubmit={handleSubmit(signin)} className='relative left-16 top-12 flex'>
                 <div>
                 <h3 className='text-3xl mb-4'>Ready to start your trip?</h3>
-                <p className='text-xl mb-4'>Sign up to our website and start discovering tour favourite places!</p>
+                <p className='text-xl mb-4'>Sign up to our website and start discovering your favourite places!</p>
                 <Input label="Enter fullname" {...register("fullName")}
                 className='mb-4'
                 />

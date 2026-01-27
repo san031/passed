@@ -46,11 +46,10 @@ function ViewSpots() {
       {isloading?<Loader/> :
     
 
-    <div className='flex flex-row-[auto_1fr] space-x-0.5 '>
-
-      <div className='bg-[#F9F6F5] relative left-12 top-12'>
+    <div className='flex flex-row-[auto_1fr] '>
+      <div className='bg-[#F9F6F5] relative left-4 top-12'>
         {/* <Filter/> */}
-        <SearchBar/>
+        {/* <SearchBar/> */}
       </div>
 
       <div >
@@ -60,7 +59,7 @@ function ViewSpots() {
       flex flex-col
       gap-20
       md:grid
-md:grid-cols-[repeat(2,_1fr)]
+md:grid-cols-[repeat(3,_1fr)]
 md:grid-rows-[repeat(auto,_1fr)]
 md:gap-40 card-list'>{
           spotsapi.map((item,id) => 
