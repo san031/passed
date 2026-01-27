@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import '../App.css'
 
 function FeaturedCard({item}) {
-  const baseUrl="http://127.0.0.1:8000/"
+  const isDevelopment = import.meta.env.MODE === 'development'
+
+const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
 
   return (
     <Link to={`/viewAttractions/${item.my_id}`} className='clipimage   h-80 w-100 .jello-diagonal-2'>

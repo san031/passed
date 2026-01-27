@@ -7,8 +7,7 @@ import axiosInstance from './Axios'
 
 function CartForm({cartitemid,cartData, className = ''}) {
 
-    const baseUrl="http://127.0.0.1:8000/"
-
+    
     const{handleCart} = useContext(UserContext)
 
     const {handleSubmit,register} = useForm(

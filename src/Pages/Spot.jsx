@@ -13,7 +13,9 @@ import axiosInstance from '../Components/Axios'
 function Spot() {
     const {handleSubmit,register} = useForm()
     const {id} = useParams()
-    const baseUrl="http://127.0.0.1:8000/"
+    const isDevelopment = import.meta.env.MODE === 'development'
+
+const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
     const [spots,setSpots] = useState([])
     const {user,cartId} = useContext(UserContext)
 
