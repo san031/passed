@@ -8,7 +8,6 @@ export const UserProvider = ({children}) => {
     const [cartId, setCartId] = useState("")
     const[cartItem,setCartItem] = useState("")
     const [count,setCount] = useState(0)
-    const baseUrl="http://127.0.0.1:8000/"
     const handleCart = async() => {
       if(user){
     //   await fetch(`${baseUrl}cart/UserCart/`,
