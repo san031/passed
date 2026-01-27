@@ -22,15 +22,7 @@ function CartCount({className=''}) {
 
     
     
-    const removeTourItem = async(cartitemid) => {
-        await fetch(`${baseUrl}cart/removecartitem/${cartitemid}/`,
-          {method:"delete",
-            headers:{"Content-Type":"application/json"}
-          }
-        )
-
-      // const data = await response.json()
-    }
+    
     const toggleSidebar = () => (setSidebarOpen(!sidebarOpen))
 
     
@@ -107,9 +99,9 @@ function CartCount({className=''}) {
             )
             }</div>
         </div>}
-        <Button onClickAgain={generatePass}>Generate Pass</Button>
+        <Button disabled={count === 0} onClickAgain={generatePass}>Generate Pass</Button>
       </div>
-    {isOpen && <Modal closeModal = {() => setisOpen(false)}><p>
+    {isOpen&&passes && <Modal closeModal = {() => setisOpen(false)}><p>
       Your pass id is : {passes}
       </p></Modal>}
     </div>

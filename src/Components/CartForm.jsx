@@ -21,12 +21,16 @@ function CartForm({cartitemid,cartData, className = ''}) {
     }
   )
 
-  const removeTourItem = async(cartitemid) => {
+  const removeTourItem = async() => {
+    console.log(cartitemid)
         await fetch(`${baseUrl}cart/removecartitem/${cartitemid}/`,
           {method:"delete",
-            headers:{"Content-Type":"application/json"}
+            headers:{"Content-Type":"application/json",
+              "Authorization":`Token ${user.token} `
+            }
           }
         )
+        // axiosInstance.delete(`cart/removecarttem/${cartitemid}`)
 
       // const data = await response.json()
     }
@@ -38,38 +42,18 @@ function CartForm({cartitemid,cartData, className = ''}) {
       console.log("cartData",cartData)
       
         if(cartData){
-            const response = await fetch(`${baseUrl}cart/updatecart/${cartitemid}`,
-                {
-                    method:"PATCH",
-                    headers :{
-                      "Content-Type":"application/json",
-                      "Authorization" : `Token ${user.token}`                  
-                    },
-                    body:JSON.stringify({
+            
+
+            axiosInstance.patch(`cart/updatecart/${cartitemid}/`,
+              {
                       start_date : newData?.start_date,
                       end_date : newData?.end_date,
                       members : newData?.members,
-                      touristSpot : `${cartitemid}`
-                    })
-
-                }
+                    }
             )
-            const data = await response.json()
-            console.log(data)
-
-            // axiosInstance.patch(`cart/updatecart/${cartitemid}`,
-            //   {
-            //           start_date : newData?.start_date,
-            //           end_date : newData?.end_date,
-            //           members : newData?.members,
-            //           touristSpot : `${cartitemid}`
-            //         }
-            // )
 
         }
-        else{
-          console.log(cartitemid, user?.token)
-      
+        else{     
 
       axiosInstance.post(`cart/addtocart/`,
         {
@@ -95,11 +79,12 @@ function CartForm({cartitemid,cartData, className = ''}) {
                   <Input className="mt-4" height="h-8 md:h-10" width="w-60 md:w-62" type="number" label="members" {...register("members",{required:true})}/>
                   <div className='flex'>
                     <Button type='submit' className="mt-4">{cartData? "UPDATE" :"MOVE TO TOUR CART" }</Button>
-                  {cartData && <Button type='button' onClick = {() => removeTourItem(cartitemid)} className="mt-4 ml-4">REMOVE ITEM</Button>}
-                  </div>
+                    {cartData && <Button  onClickAgain = {() => removeTourItem()} className="mt-4 ml-4">REMOVE ITEM</Button>}
+                  </div> 
                   
                   
                 </form> 
+                
     </div>
   )
 }
