@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import '../App.css'
 
-function Button({children, className=''}) {
+function Button({children, className='', onClickAgain ,...props}) {
   const [isClicked,setIsClicked] = useState(false)
-  const handleClick = () => {setIsClicked(!isClicked)}
+  const handleClick = (e) => {setIsClicked(!isClicked)
+    if(onClickAgain){
+      onClickAgain(e)
+    }
+  }
   return (
     <div>
-      <button type='submit' onClick={handleClick} className={`
+      <button type='submit'  {...props} onClick={handleClick} className={`
       ${className}
       ${isClicked ? 'jello-horizontal':''}
 
