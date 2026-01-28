@@ -1,3 +1,23 @@
+# Passed
+
+A full-stack tourist pass portal(frontend repo).
+To manage the global state context api is used.
+
+
+## Tech Stack
+
+- ReactJs
+- Tailwind Css
+- Axios
+- Render
+
+
+## Features
+
+- Logged in user can add tourist spot to touristcart
+- The cart item can be updated or removed.
+- A pass with unique passcode is generated for each cart
+- Responsive Design
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
