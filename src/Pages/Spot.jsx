@@ -13,6 +13,7 @@ import axiosInstance from '../Components/Axios'
 function Spot() {
     const {handleSubmit,register} = useForm()
     const {id} = useParams()
+    
     const isDevelopment = import.meta.env.MODE === 'development'
 
 const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
