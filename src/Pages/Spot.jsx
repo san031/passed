@@ -14,9 +14,7 @@ function Spot() {
     const {handleSubmit,register} = useForm()
     const {id} = useParams()
     
-    const isDevelopment = import.meta.env.MODE === 'development'
-
-const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
+    
     const [spots,setSpots] = useState([])
     const {user,cartId} = useContext(UserContext)
 
@@ -31,6 +29,7 @@ const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta
       
       fetchSpots();
     }, [])
+    
     
    
   return (
@@ -51,10 +50,10 @@ const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta
             Visiting Time : {spots.opening_time} to {spots.closing_time}</div>
         </div>
          
-          <img className='mix-blend-multiply drop-shadow-[0_10px_10px_#603f2680] lg:h-140 md:h-90 w-auto' src={`${baseUrl}${spots?.images?.[0]?.image}`}/> 
+          <img className='mix-blend-multiply drop-shadow-[0_10px_10px_#603f2680] lg:h-140 md:h-90 w-auto' src={`${spots?.images?.[0]?.image}`}/> 
           <div className='relative top-24'>{spots.category}
             
-        {console.log(`${spots.my_id}`)}
+        {/* {console.log(`${spots.my_id}`)} */}
         <CartForm cartitemid = {`${spots.my_id}`}/>
         <hr className='m-2'/>
         <div className='relative left-auto  md:text-2xl text-lg'> Ticket Price : Rs.{spots.price}</div>
@@ -64,7 +63,8 @@ const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta
           {spots?.images?.map((image) => 
           // console.log(image?.['image'])
           <Link className='border-2 rounded-3xl'>
-          <img className='w-32 h-36 object-fit' src={`${baseUrl}${image?.image}`}/>
+            {console.log(`${image?.image}`)}
+          <img className='w-32 h-36 object-fit' src={`${image?.image}`}/>
           </Link>
           )}
          </div>
