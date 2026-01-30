@@ -11,7 +11,7 @@ function Card({item}) {
     to={`/viewAttractions/${item.my_id}`}
     >
          
-            <img src={`${item.images[0].image}`} alt={`${item.title}`} className='drop-shadow-[0_10px_10px_#603f2680]  imgscrim' />
+            <img src={`${item?.images?.[0]?.image}`} alt={`${item.title}`} className='drop-shadow-[0_10px_10px_#603f2680]  imgscrim' />
           <div className=' shadycontent  absolute z-10 -bottom-70 left-6 text-amber-100 text-2xl ' >
             <div>{item.category}</div>
             <div>{item.title}</div>
