@@ -18,9 +18,6 @@ function CartCount({className=''}) {
     const [isOpen,setisOpen] = useState(false)
     const[isLoading,setIsLoading] = useState(false)
 
-    const isDevelopment = import.meta.env.MODE === 'development'
-
-const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta.env.VITE_API_URL_DEPLOY
     const toggleSidebar = () => (setSidebarOpen(!sidebarOpen))
 
     
@@ -89,7 +86,7 @@ const baseUrl = isDevelopment ? import.meta.env.VITE_API_URL_LOCAL : import.meta
               members:item.members}
               }
                />
-              <img className='w-50 h-50' src={`${baseUrl}${item?.spots?.images?.[0].image}`} alt="" />
+              <img className='w-50 h-50' src={`${item?.spots?.images?.[0].image}`} alt="" />
               {/* <div className='flex place-items-center'>
                 <button onClick = {() => removeTourItem(item.id)}>Remove Item</button>
               </div> */}
