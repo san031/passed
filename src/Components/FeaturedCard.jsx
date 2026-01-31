@@ -6,8 +6,8 @@ function FeaturedCard({item}) {
 
 
   return (
-    <Link to={`/viewAttractions/${item.my_id}`} className='clipimage   h-80 w-100 .jello-diagonal-2'>
-      <img src={`${item.images[0].image}`} className =' h-60 w-80'/>
+    <Link to={`/viewAttractions/${item.my_id}`} className='clipimage h-80 w-100  .jello-diagonal-2'>
+      <img src={`${item?.images?.[0]?.image}`} className =' h-60 w-80'/>
       <div className=''>
         {item.title}
       </div>

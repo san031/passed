@@ -7,6 +7,7 @@ import Button from '../Components/Button'
 import Input from '../Components/Input'
 import PassCard from '../Components/PassCard'
 import axiosInstance from '../Components/Axios'
+import Container from '../Components/Container'
 
 function PassValidity() {
     const {user} = useContext(UserContext)
@@ -44,7 +45,7 @@ function PassValidity() {
    
     
   return (
-    <div>
+    <Container>
         <div className='font-bold text-3xl'>Check Pass Validity</div>
         <form onSubmit={handleSubmit(checkpassvalidity)} className='m-2.5 p-2.5 flex flex-col'>
             {/* <label htmlFor="passid">Enter your Pass ID:</label> */}
@@ -63,7 +64,7 @@ function PassValidity() {
         <div className='flex  justify-center'>
           {  isPassCard &&  <PassCard passcode = {passcode} spotty={spotty} />}
         </div>
-    </div>
+    </Container>
   )
 }
 

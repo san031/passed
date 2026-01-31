@@ -8,6 +8,7 @@ import Loader from '../Components/Loader'
 import { useLocation } from 'react-router-dom'
 import SearchBar from '../Components/SearchBar'
 import axiosInstance from '../Components/Axios'
+import Container from '../Components/Container'
 
 function ViewSpots() {
 
@@ -42,7 +43,7 @@ function ViewSpots() {
     }, [setSpotsapi])
     
   return (
-    <div>
+    <Container>
       {isloading?<Loader/> :
     
 
@@ -77,7 +78,7 @@ md:gap-40 card-list'>{
       
     </div>}
 
-    </div>
+    </Container>
   )
 }
 

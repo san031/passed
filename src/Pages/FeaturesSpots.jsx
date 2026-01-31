@@ -21,8 +21,9 @@ function FeaturesSpots() {
   }, [])
   
   return (
-    <div>
-      {isLoading? <Loader/> : <div className='relative flex flex-row  gap-12 '>
+    <div className='mx-10 my-20 mb-10'>
+      <h1 className='text-3xl mb-8'>Featured Items</h1>
+      {isLoading? <Loader/> : <div className='relative flex flex-row items-center justify-center gap-12 '>
       {
         featurespot && featurespot.map((item) => <FeaturedCard item={item} key={item.id}/>)
       }

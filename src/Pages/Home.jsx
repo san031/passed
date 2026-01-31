@@ -67,11 +67,13 @@ function Home() {
 
   <Container className='lg:top-28' >
     <img src={pinaColada} className='drop-shadow-[0_10px_10px_#603f2680] object-contain lg:w-[32%] md:w-[40%] w-[60%] h-auto  relative top-30 lg:top-36'/>
-    <p className='absolute lg:top-52 top-40 lg:right-56  md:-right-0 -right-72 text-4xl'>A new way to explore the world</p>
+    <div>
+      <p className='absolute lg:top-52 top-40 lg:right-56  md:-right-0 -right-72 text-4xl'>A new way to explore the world</p>
     <p className='absolute lg:top-72 top-60 lg:right-48  md:-right-0 -right-72 lg:w-136 w-116 text-xl'>For decades travellers have reached for Lonely Planet books when looking to plan and execute their perfect 
 trip, but now, they can also let Lonely Planet Experiences lead the way</p>
 
-<Button className='abosulte top-64 left-40 '>Learn more</Button>
+<Button className='abosulte top-64 -left-40 '>Learn more</Button>
+    </div>
 
   </Container>
 
