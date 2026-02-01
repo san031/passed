@@ -52,11 +52,10 @@ function Spot() {
          
           <img className='mix-blend-multiply drop-shadow-[0_10px_10px_#603f2680] lg:h-140 md:h-90 w-auto' src={`${spots?.images?.[0]?.image}`}/> 
           <div className='relative top-24'>{spots.category}
-            
-        {/* {console.log(`${spots.my_id}`)} */}
+
         <CartForm cartitemid = {`${spots.my_id}`}/>
         <hr className='m-2'/>
-        <div className='relative left-auto  md:text-2xl text-lg'> Ticket Price : Rs.{spots.price}</div>
+        <div className='relative left-auto  md:text-2xl text-lg'> Ticket Price : Rs.{spots.price}/person</div>
           </div>
          </div>
          <div className='flex flex-rows'>
@@ -69,18 +68,6 @@ function Spot() {
           )}
          </div>
        </div>}
-         {/* {isloading ? "loading":
-         console.log(spots?.images?.[0]?.image)}
-        {spots.category}
-        {spots.price}
-        <form onSubmit={handleSubmit(addToCart)}>
-          <Input type = "date" label ="start_date" {...register("start_date",{required:true})}/>
-          <Input type="date" label="End Date" {...register("end_date",{required:true})}/>
-          <Input type="number" label="members" {...register("members",{required:true})}/>
-          <Button>MOVE TO TOUR CART</Button>
-          
-          
-        </form> */}
         
         
     </div>

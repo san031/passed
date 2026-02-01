@@ -16,45 +16,6 @@ function Login() {
     const {user,setUser} = useContext(UserContext)
     const navigate = useNavigate()
 
-    
-
-    // const handleLogin = async(data) => {
-    //     try {
-    //          console.log(data);
-    //     const response = await fetch("http://127.0.0.1:8000/login/", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         email: data.email,
-    //         password: data.password,
-    //       }),
-    //     })
-
-    //     console.log(response);
-    //     // if(!response.ok)
-    //     //     throw new Error("Login failed")
-
-        
-
-    //     const responseData = await response.json()
-
-    //     // console.log(responseData);
-        
-
-    //     localStorage.setItem("user", JSON.stringify(responseData))
-
-    //     setUser(responseData)
-    //     if(user)
-    //         navigate('/')
-    //     } catch (error) {
-    //      console.log("Login error", error.statusText);   
-    //     }
-       
-
-    // }
-
     const handleLogin = (data) => {
         try {
             axiosInstance.post(`login/`,{

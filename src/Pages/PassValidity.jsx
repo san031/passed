@@ -18,19 +18,8 @@ function PassValidity() {
     const {register, handleSubmit} = useForm()
     const checkpassvalidity =async(passdata) =>{
 
-        // {console.log(passdata)}
-        setPasscode(passdata.pass_id)
-        // const response=await fetch('http://127.0.0.1:8000/pass/viewpass/',
-        //     {
-        //         method:"GET",
-        //         headers:{
-        //             "Content-Type":"application/json",
-        //             "Authorization" :`Token ${user.token}`
-        //         }
-        //     }
-        // )
         
-        // const data = await response.json()
+        setPasscode(passdata.pass_id)
         const {data} = await axiosInstance.get(`pass/viewpass/`)
         data.map((passs) => {passs.pass_code === passdata.passid ? 
              setSpotty(passs)
