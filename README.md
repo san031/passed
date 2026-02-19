@@ -11,6 +11,31 @@ To manage the global state context api is used.
 - Axios
 - Render
 
+## Installation
+
+- Clone using the following repo link
+
+
+```bash
+git clone https://github.com/san031/passed.git buypasspage
+```
+
+- Go to the project folder and run npm install
+
+```bash
+cd buypasspage
+
+npm install
+```
+
+
+- Now run the app
+
+```bash 
+npm run dev
+```
+
+
 
 ## Features
 
