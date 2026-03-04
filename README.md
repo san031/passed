@@ -3,6 +3,9 @@
 A full-stack tourist pass portal(frontend repo), here is [backend repo](https://github.com/san031/passed-backend).
 To manage the global state context api is used.
 
+### Demo
+![Demo] (https://github.com/san031/passed/blob/main/src/ImageUtils/viewSpots.png)
+
 
 ## Tech Stack
 
@@ -17,22 +20,20 @@ To manage the global state context api is used.
 
 
 ```bash
-git clone https://github.com/san031/passed.git buypasspage
+git clone https://github.com/san031/passed-backend.git buypass
 ```
 
-- Go to the project folder and run npm install
 
 ```bash
-cd buypasspage
+cd buypass
 
-npm install
 ```
 
 
 - Now run the app
 
 ```bash 
-npm run dev
+python manage.py runserver
 ```
 
 
