@@ -4,7 +4,7 @@ A full-stack tourist pass portal(frontend repo), here is [backend repo](https://
 To manage the global state context api is used.
 
 ### Demo
-![Demo] (https://github.com/san031/passed/blob/main/src/ImageUtils/viewSpots.png)
+![ Demo ](https://github.com/san031/passed/blob/main/src/ImageUtils/viewSpots.png)
 
 
 ## Tech Stack
