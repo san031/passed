@@ -20,20 +20,22 @@ To manage the global state context api is used.
 
 
 ```bash
-git clone https://github.com/san031/passed-backend.git buypass
+
+git clone https://github.com/san031/passed.git buypasspage
 ```
 
 
-```bash
-cd buypass
 
-```
 
 
 - Now run the app
 
 ```bash 
-python manage.py runserver
+
+cd buypasspage
+
+npm install
+
 ```
 
 
