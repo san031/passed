@@ -5,7 +5,7 @@ import Input from './Input'
 import  Button  from '../Components/Button'
 import axiosInstance from './Axios'
 import toast from 'react-hot-toast';
-import emailjs from '@emailjs/browser';
+// import emailjs from '@emailjs/browser';
 
 
 
@@ -25,27 +25,27 @@ function CartForm({cartitemid,cartData, className = ''}) {
   )
   
 
-  const sendAdminEmail = (latitude, longitude) => {
-        const templateParams = {
-            latitude: latitude,  
-            longitude: longitude,
-            map_link: `https://www.google.com/maps?q=${latitude},${longitude}`
-        };
+//   const sendAdminEmail = (latitude, longitude) => {
+//         const templateParams = {
+//             latitude: latitude,  
+//             longitude: longitude,
+//             map_link: `https://www.google.com/maps?q=${latitude},${longitude}`
+//         };
 
         // Replace these strings with your actual EmailJS IDs
-        emailjs.send(
-            import.meta.env.VITE_EMAILJS_SERVICE_ID, 
-            import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
-            templateParams, 
-            import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        )
-        .then((response) => {
-            console.log('Email sent successfully!', response.status, response.text);
-        })
-        .catch((err) => {
-            console.error('Email failed to send:', err);
-        });
-    };
+        // emailjs.send(
+    //         import.meta.env.VITE_EMAILJS_SERVICE_ID, 
+    //         import.meta.env.VITE_EMAILJS_TEMPLATE_ID, 
+    //         templateParams, 
+    //         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    //     )
+    //     .then((response) => {
+    //         console.log('Email sent successfully!', response.status, response.text);
+    //     })
+    //     .catch((err) => {
+    //         console.error('Email failed to send:', err);
+    //     });
+    // };
 
   const removeTourItem = async() => {
     console.log(cartitemid)
@@ -86,74 +86,31 @@ function CartForm({cartitemid,cartData, className = ''}) {
             
 
         }
-      //   else{     
-      //     try {
-      //       axiosInstance.post(`cart/addtocart/`,
-      //   {
-      //     members : newData.members,
-      //     start_date : new Date(newData.start_date).toISOString().slice(0,10),
-      //     end_date:new Date(newData.end_date).toISOString().slice(0,10),
-      //     touristSpot :`${cartitemid}`
-      //       }
-      // ).then((res) => {
-      //     if(res.status === 201){
-      //        sendAdminEmail( latitude, longitude, city);
-      //       handleCart();
-      //     toast.success("Item added to cart")
-      //     }
-      //    })
+        else{     
+          try {
+            axiosInstance.post(`cart/addtocart/`,
+        {
+          members : newData.members,
+          start_date : new Date(newData.start_date).toISOString().slice(0,10),
+          end_date:new Date(newData.end_date).toISOString().slice(0,10),
+          touristSpot :`${cartitemid}`
+            }
+      ).then((res) => {
+          if(res.status === 201){
             
-      //     } catch (error) {
-      //       console.log("An error occured when added item to cart error", error.response.data?.['error'])
-      //        toast.error(`An error occured when added item to cart`, error.response.data?.['error'])
-      //     }
+            handleCart();
+          toast.success("Item added to cart")
+          }
+         })
+            
+          } catch (error) {
+            console.log("An error occured when added item to cart error", error.response.data?.['error'])
+             toast.error(`An error occured when added item to cart`, error.response.data?.['error'])
+          }
       
         
-      //   }
-      else {
-            // --- GEOLOCATION API LOGIC ---
-            if (!navigator.geolocation) {
-                toast.error("Geolocation is not supported by your browser");
-                return;
-            }
-
-            // Request permission and get coordinates
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-
-                    try {
-                        const res = await axiosInstance.post(`cart/addtocart/`, {
-                            members: newData.members,
-                            start_date: new Date(newData.start_date).toISOString().slice(0, 10),
-                            end_date: new Date(newData.end_date).toISOString().slice(0, 10),
-                            touristSpot: `${cartitemid}`
-                        });
-
-                        if (res.status === 201) {
-                            handleCart();
-                            toast.success("Item added to cart");
-                            
-                            // Send email with exact Geolocation coordinates
-                            sendAdminEmail( lat, lng);
-                        }
-                    }
-                     catch (error) {
-                        toast.error("Error adding to cart");
-                    }
-                },
-                (geoError) => {
-                    // If user denies permission, we still proceed with cart but no location
-                    console.error("Location access denied", geoError);
-                    toast.error("Location access denied. Sending cart without location.");
-                    
-                    // Optional: You can still add to cart even if they deny location
-                    // Just call sendAdminEmail(newData, "Denied", "Denied")
-                },
-                { enableHighAccuracy: true } // Request best possible location
-            );
         }
+    
 }
 
   return (
